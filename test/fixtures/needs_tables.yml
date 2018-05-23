@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  advocateId: MyString
+  needsMain: MyString
+  needsMainPerc: 1.5
+  structure: 1.5
+  stability: 1.5
+  selfExpression: 1.5
+  practicality: 1.5
+  love: 1.5
+  liberty: 1.5
+  ideal: 1.5
+  harmony: 1.5
+  excitement: 1.5
+  curiosity: 1.5
+  closeness: 1.5
+  challenge: 1.5
+
+two:
+  advocateId: MyString
+  needsMain: MyString
+  needsMainPerc: 1.5
+  structure: 1.5
+  stability: 1.5
+  selfExpression: 1.5
+  practicality: 1.5
+  love: 1.5
+  liberty: 1.5
+  ideal: 1.5
+  harmony: 1.5
+  excitement: 1.5
+  curiosity: 1.5
+  closeness: 1.5
+  challenge: 1.5
