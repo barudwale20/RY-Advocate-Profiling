@@ -16,7 +16,7 @@ module Api
         jsonOutput = profiles.sourceFile.to_json
         advocateid = profiles.advocateId.to_json
         datafile = jsonOutput
-        render plain: advocateid
+        # render plain: advocateid
 
         backdir = Dir.getwd;
 
@@ -102,7 +102,22 @@ module Api
         selfTranscendence = ibmOutput['tree']['children'][2]['children'][0]['children'][4]['percentage']
 
         # # render json: ('%.5f'%selfTranscendence)
-        stat = ProfileTable.where(:advocateId => advocateid).update_all(:bigFiveMain => bigFiveMain, :bigFiveMainPerc => bigFiveMainPc, :needsMain => needsMain, :needsMainPerc => needsMainPc, :valuesMain => valuesMain, :valuesMainPerc => valuesMainPc)
+        # stat = ProfileTable.where(:advocateId => advocateid).update_all(:bigFiveMain => bigFiveMain, :bigFiveMainPerc => bigFiveMainPc, :needsMain => needsMain, :needsMainPerc => needsMainPc, :valuesMain => valuesMain, :valuesMainPerc => valuesMainPc)
+
+        advocateid.gsub!(/\A"|"\Z/, '')
+
+        user = ProfileTable.where(advocateId: advocateid)
+        user.update(bigFiveMain: bigFiveMain, bigFiveMainPerc: bigFiveMainPc, needsMain: needsMain, needsMainPerc: needsMainPc, valuesMain: valuesMain, valuesMainPerc: valuesMainPc)
+
+
+        # advocateid.gsub!(/\A"|"\Z/, '')
+        render plain: advocateid
+        # user = ProfileTable.find_by(advocateId: advocateid)
+        # cc = user.status.to_json
+        # render plain: cc
+        # user.update(bigFiveMain: bigFiveMain, bigFiveMainPerc: bigFiveMainPc, needsMain: needsMain, needsMainPerc: needsMainPc, valuesMain: valuesMain, valuesMainPerc: valuesMainPc)
+
+
         p Time.current
 
 
