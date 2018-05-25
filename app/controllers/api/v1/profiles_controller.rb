@@ -35,7 +35,7 @@ module Api
           backdir = Dir.getwd;
           Dir.chdir('public/AdvocateProfilesText')
 
-          command = 'curl -X POST --user ********-***-****-****-************:************ --header "Content-Type: text/plain;charset=utf-8" --header "Accept: application/json"' + ' ' + "--data-binary " + '"' + "@#{datafile}" + '"' + " --output profileout.json " + '"' + "https://gateway.watsonplatform.net/personality-insights/api/v2/profile?version=2017-10-13" + '"';
+          command = 'curl -X POST --user ********-****-****-****-************:************ --header "Content-Type: text/plain;charset=utf-8" --header "Accept: application/json"' + ' ' + "--data-binary " + '"' + "@#{datafile}" + '"' + " --output profileout.json " + '"' + "https://gateway.watsonplatform.net/personality-insights/api/v2/profile?version=2017-10-13" + '"';
           system(command)
 
           FileUtils.mv 'profileout.json', backdir, :force => true
