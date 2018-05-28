@@ -11,10 +11,35 @@ module Api
         # parsedJsonOutput = JSON.parse(jsonOutput)
         # datafile = parsedJsonOutput[0]['sourceFile']
 
-        # icount = ProfileTable.where(status: 'Incomplete').count
+        icount = ProfileTable.where(status: 'Incomplete').count
         icount = ProfileTable.where(status: 'Incomplete').or(ProfileTable.where(status: 'Error')).count
         p "CCCCCCCCCCCCCCCCC"
         p icount
+
+        # user1 = ProfileTable.create(advocateId: 'RY1', sourceFile: 'sampletext.txt', status: 'Incomplete')
+        #
+        # p user1.errors
+        # #
+        # user2 = ProfileTable.create(advocateId: 'RY2', sourceFile: 'datafile2.txt', status: 'Error')
+        #
+        # p user2.errors
+
+        # u = ProfileTable.find_by(status: 'Completed')
+        # u.update(status: 'Incomplete')
+        # p u.errors
+        # ProfileTable.destroy_all
+        # BigFiveTable.destroy_all
+        # NeedsTable.destroy_all
+        # ValuesTable.destroy_all
+
+        # num = BigFiveTable.count
+        # p "LLLLLLLLLLLLL"
+        # p num
+        #
+        # po = ProfileTable.find_by(advocateId: 'RY2')
+        # poo = po.bigFiveMain.to_json
+        # p "PPPPPPPPPPPOOOOOOOOOOOOOOO"
+        # p poo
 
         while icount > 0 do
           p "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
@@ -161,7 +186,13 @@ module Api
               stat3 = ValuesTable.create(advocateId: advocateid, valuesMain: valuesMain, valuesMainPerc: valuesMainPc, selfTranscendence: selfTranscendence, selfEnhancement: selfEnhancement, hedonism: hedonism, opennessToChange: opennessToChange, conservation: conservation)
             end
 
-            if(stat0 == true && stat1 == true && stat2 == true && stat3 == true)
+            p "STATS"
+            p stat0
+            p stat1
+            p stat2
+            p stat3
+
+            if(stat0 && stat1 && stat2 && stat3)
               user.update(status: 'Completed')
             else
               user.update(status: 'Error')
