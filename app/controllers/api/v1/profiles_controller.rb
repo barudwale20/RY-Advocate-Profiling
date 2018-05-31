@@ -5,46 +5,10 @@ module Api
     class ProfilesController < ApplicationController
       def index
 
-        #by Shubham
-        # profiles = ProfileTable.find_by_sql("SELECT sourceFile FROM profile_tables WHERE status='Incomplete'")
-        # jsonOutput = profiles.to_json
-        # parsedJsonOutput = JSON.parse(jsonOutput)
-        # datafile = parsedJsonOutput[0]['sourceFile']
-
-        icount = ProfileTable.where(status: 'Incomplete').count
-        icount = ProfileTable.where(status: 'Incomplete').or(ProfileTable.where(status: 'Error')).count
-        p "CCCCCCCCCCCCCCCCC"
-        p icount
-
-        # user1 = ProfileTable.create(advocateId: 'RY1', sourceFile: 'sampletext.txt', status: 'Incomplete')
-        #
-        # p user1.errors
-        # #
-        # user2 = ProfileTable.create(advocateId: 'RY2', sourceFile: 'datafile2.txt', status: 'Error')
-        #
-        # p user2.errors
-
-        # u = ProfileTable.find_by(status: 'Completed')
-        # u.update(status: 'Incomplete')
-        # p u.errors
-        # ProfileTable.destroy_all
-        # BigFiveTable.destroy_all
-        # NeedsTable.destroy_all
-        # ValuesTable.destroy_all
-
-        # num = BigFiveTable.count
-        # p "LLLLLLLLLLLLL"
-        # p num
-        #
-        # po = ProfileTable.find_by(advocateId: 'RY2')
-        # poo = po.bigFiveMain.to_json
-        # p "PPPPPPPPPPPOOOOOOOOOOOOOOO"
-        # p poo
+        icount = ProfileTable.where(status: 'New').or(ProfileTable.where(status: 'Error')).count
 
         while icount > 0 do
-          p "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-          #by Pradeep
-          profiles = ProfileTable.find_by(status: "Incomplete")
+          profiles = ProfileTable.find_by(status: "New")
 
           if(profiles)
             s = 1
@@ -60,7 +24,7 @@ module Api
           backdir = Dir.getwd;
           Dir.chdir('public/AdvocateProfilesText')
 
-          command = 'curl -X POST --user ********-****-****-****-************:************ --header "Content-Type: text/plain;charset=utf-8" --header "Accept: application/json"' + ' ' + "--data-binary " + '"' + "@#{datafile}" + '"' + " --output profileout.json " + '"' + "https://gateway.watsonplatform.net/personality-insights/api/v2/profile?version=2017-10-13" + '"';
+          command = 'curl -X POST --user 1160d099-802a-410f-b582-b9b5678d5c80:EJ2ARC2i4Twf --header "Content-Type: text/plain;charset=utf-8" --header "Accept: application/json"' + ' ' + "--data-binary " + '"' + "@#{datafile}" + '"' + " --output profileout.json " + '"' + "https://gateway.watsonplatform.net/personality-insights/api/v2/profile?version=2017-10-13" + '"';
           system(command)
 
           FileUtils.mv 'profileout.json', backdir, :force => true
@@ -154,7 +118,6 @@ module Api
 
             user = ProfileTable.find_by(advocateId: advocateid)
             stat0 = user.update(bigFiveMain: bigFiveMain, bigFiveMainPerc: bigFiveMainPc, needsMain: needsMain, needsMainPerc: needsMainPc, valuesMain: valuesMain, valuesMainPerc: valuesMainPc)
-            p "$$$$$$$$$$$$$$$$$$$$$$$$$$"
             p user.errors
 
 
@@ -186,19 +149,12 @@ module Api
               stat3 = ValuesTable.create(advocateId: advocateid, valuesMain: valuesMain, valuesMainPerc: valuesMainPc, selfTranscendence: selfTranscendence, selfEnhancement: selfEnhancement, hedonism: hedonism, opennessToChange: opennessToChange, conservation: conservation)
             end
 
-            p "STATS"
-            p stat0
-            p stat1
-            p stat2
-            p stat3
-
             if(stat0 && stat1 && stat2 && stat3)
               user.update(status: 'Completed')
             else
               user.update(status: 'Error')
             end
 
-            p "$$$$$$$$$$$$$$$$$$$$$$$$$$"
             p user.errors
           end
           icount -= 1
