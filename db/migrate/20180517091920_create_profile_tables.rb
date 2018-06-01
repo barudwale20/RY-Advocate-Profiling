@@ -10,7 +10,6 @@ class CreateProfileTables < ActiveRecord::Migration[5.1]
       t.string :valuesMain
       t.float :valuesMainPerc
       t.text :categorization
-      t.datetime :lastUpdated
       t.string :status
 
       t.timestamps
