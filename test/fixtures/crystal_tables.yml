@@ -1,0 +1,37 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  advocateId: MyString
+  sourceFile: MyText
+  crystalId: MyString
+  discType: MyString
+  confidence: 1.5
+  discImage: MyText
+  personalityOverview: MyText
+  personalityQualities: MyText
+  likelyMotivations: MyText
+  likelyBehaviors: MyText
+  emailing: MyText
+  communication: MyText
+  buildingTrust: MyText
+  selling: MyText
+  workingTogether: MyText
+  status: MyString
+
+two:
+  advocateId: MyString
+  sourceFile: MyText
+  crystalId: MyString
+  discType: MyString
+  confidence: 1.5
+  discImage: MyText
+  personalityOverview: MyText
+  personalityQualities: MyText
+  likelyMotivations: MyText
+  likelyBehaviors: MyText
+  emailing: MyText
+  communication: MyText
+  buildingTrust: MyText
+  selling: MyText
+  workingTogether: MyText
+  status: MyString

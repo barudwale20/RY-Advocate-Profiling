@@ -24,7 +24,8 @@ module Api
           backdir = Dir.getwd;
           Dir.chdir('public/AdvocateProfilesText')
 
-          command = 'curl -X POST --user 1160d099-802a-410f-b582-b9b5678d5c80:EJ2ARC2i4Twf --header "Content-Type: text/plain;charset=utf-8" --header "Accept: application/json"' + ' ' + "--data-binary " + '"' + "@#{datafile}" + '"' + " --output profileout.json " + '"' + "https://gateway.watsonplatform.net/personality-insights/api/v2/profile?version=2017-10-13" + '"';
+          # REPLACE THE FOLLWING LINE AS USERNAME:PASSWORD (IN PLACE OF *)
+          command = 'curl -X POST --user ********-****-****-****-************:************ --header "Content-Type: text/plain;charset=utf-8" --header "Accept: application/json"' + ' ' + "--data-binary " + '"' + "@#{datafile}" + '"' + " --output profileout.json " + '"' + "https://gateway.watsonplatform.net/personality-insights/api/v2/profile?version=2017-10-13" + '"';
           system(command)
 
           FileUtils.mv 'profileout.json', backdir, :force => true
@@ -112,14 +113,8 @@ module Api
             selfTranscendence = ibmOutput['tree']['children'][2]['children'][0]['children'][4]['percentage']
 
 
-
-
-
-
             user = ProfileTable.find_by(advocateId: advocateid)
             stat0 = user.update(bigFiveMain: bigFiveMain, bigFiveMainPerc: bigFiveMainPc, needsMain: needsMain, needsMainPerc: needsMainPc, valuesMain: valuesMain, valuesMainPerc: valuesMainPc)
-            p user.errors
-
 
             b5profiles = BigFiveTable.find_by(advocateId: advocateid)
             if(b5profiles)
@@ -155,7 +150,6 @@ module Api
               user.update(status: 'Error')
             end
 
-            p user.errors
           end
           icount -= 1
         end
